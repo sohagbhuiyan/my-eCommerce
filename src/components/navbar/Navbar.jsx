@@ -33,11 +33,19 @@ const Navbar = () => {
   const [mobileSubmenuOpen, setMobileSubmenuOpen] = useState(null);
   const [hoverIndex, setHoverIndex] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
+  const [desktopSubmenuOpen, setDesktopSubmenuOpen] = useState(null);
 
   return (
     <div className="bg-[#CF212B] text-white">
       {/* Top Bar */}
-      <div className="flex items-center justify-between px-6 py-3">
+      
+      <div className="flex items-center justify-center space-x-6 px-6 py-2 text-sm">
+        <span className="hover:text-gray-300 cursor-pointer">Big Sale</span>
+        <span className="hover:text-gray-300 cursor-pointer">Offers</span>
+        <span className="hover:text-gray-300 cursor-pointer">System Builder</span>
+        <span className="hover:text-gray-300 cursor-pointer">Customer Service</span>
+      </div>
+      <div className="flex items-center justify-between px-4 py-3 md:px-6 lg:px-12">
         {/* Mobile Menu Button */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -46,49 +54,54 @@ const Navbar = () => {
           {mobileMenuOpen ? <FaTimes /> : <FaBars />}
         </button>
 
-        {/* Logo */}
-        <h1 className="text-2xl font-bold md:text-4xl">SaverFavor</h1>
+        <div className="flex-1 flex items-center justify-center gap-3 px-2 md:gap-10">
 
-        {/* Search Bar */}
-        <div className="relative bg-white flex-1 max-w-sm rounded-md flex">
-          <input
-            type="text"
-            placeholder="Enter Your Keyword..."
-            className="w-full px-4 py-2 text-black rounded-md outline-none"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            onKeyDown={(e) => e.key === "Enter" && console.log("Searching:", searchQuery)}
-          />
-          <button
-            className="p-2 bg-green-500 hover:bg-green-600 rounded-r-md hover:cursor-pointer"
-            onClick={() => console.log("Searching:", searchQuery)}
-          >
-            <AiOutlineSearch className="text-white text-xl" />
-          </button>
-        </div>
+          <h1 className="text-sm sm:text-2xl font-bold md:text-4xl text-center">SaverFavor</h1>
 
-        {/* Desktop Icons (Hidden in Mobile) */}
-        <div className="hidden md:flex items-center space-x-4">
-          <FaShoppingCart className="text-lg cursor-pointer hover:text-gray-300" />
-          <FaHeart className="text-lg cursor-pointer hover:text-gray-300" />
-          <FaExchangeAlt className="text-lg cursor-pointer hover:text-gray-300" />
-          <FaUser className="text-lg cursor-pointer hover:text-gray-300" />
+          <div className="relative bg-white w-full max-w-xs sm:max-w-xs md:max-w-lg lg:max-w-xl rounded-md flex">
+            <input
+              type="text"
+              placeholder="Enter Your Keyword..."
+              className="w-full px-2 text-sm md:text-lg sm:px-4 text-black rounded-md outline-none"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && console.log("Searching:", searchQuery)}
+            />
+            <button
+              className="p-1 sm:p-2 bg-green-500 hover:bg-green-600 rounded-r-md"
+              onClick={() => console.log("Searching:", searchQuery)}
+            >
+              <AiOutlineSearch className="text-white text-xl" />
+            </button>
+          </div>
+
+          <div className="hidden md:flex items-center justify-center space-x-4">
+            <FaShoppingCart className="text-lg cursor-pointer hover:text-gray-300" />
+            <FaHeart className="text-lg cursor-pointer hover:text-gray-300" />
+            <FaExchangeAlt className="text-lg cursor-pointer hover:text-gray-300" />
+            <FaUser className="text-lg cursor-pointer hover:text-gray-300" />
+          </div>
         </div>
       </div>
 
       {/* Desktop Menu */}
-      <div className="hidden md:flex items-center justify-center space-x-6 px-6 py-3 text-sm">
+      <div className="hidden md:flex items-center justify-center space-x-2 px-2 py-3 text-sm md:space-x-4 md:px-4">
         {menuItems.map((item, index) => (
           <div
             key={index}
             className="relative cursor-pointer group"
             onMouseEnter={() => setHoverIndex(index)}
             onMouseLeave={() => setHoverIndex(null)}
+            onClick={() => setDesktopSubmenuOpen(desktopSubmenuOpen === index ? null : index)}
           >
-            <span className="hover:text-gray-500">{item.name}</span>
+            <span className="hover:text-gray-300">{item.name}</span>
 
-            {item.subMenu && hoverIndex === index && (
-              <div className="absolute left-0 mt-2 w-48 bg-gray-300 text-black shadow-lg rounded-md">
+            {item.subMenu && (
+              <div
+                className={`${
+                  (hoverIndex === index || desktopSubmenuOpen === index) ? 'block' : 'hidden'
+                } absolute left-0 mt-2 w-48 bg-gray-300 text-black shadow-lg rounded-md`}
+              >
                 {item.subMenu.map((subItem, subIndex) => (
                   <div
                     key={subIndex}
@@ -105,25 +118,25 @@ const Navbar = () => {
 
       {/* Mobile Menu (Sidebar) */}
       <div
-        className={`md:hidden fixed top-0 left-0 h-full w-64 bg-gray-900 text-white transform ${
+        className={`md:hidden fixed top-0 left-0 h-full w-48 bg-gray-900 text-white transform ${
           mobileMenuOpen ? "translate-x-0" : "-translate-x-full"
-        } transition-transform duration-300`}
+        } transition-transform duration-300 z-50`}
       >
         {/* Close Button */}
         <button
           onClick={() => setMobileMenuOpen(false)}
-          className="absolute top-4 right-4 text-xl"
+          className="absolute top-4 right-4 text-xl cursor-pointer"
         >
           <FaTimes />
         </button>
 
         {/* Mobile Menu Title */}
-        <h2 className="text-xl font-bold text-green-400 p-4">Menu</h2>
+        <h2 className="text-sm font-bold text-green-400 p-4">Items</h2>
 
         {/* Mobile Menu Items */}
-        <div className="flex flex-col space-y-2 px-6">
+        <div className="flex flex-col space-y-2 px-4 overflow-y-auto pb-10 h-[calc(100vh-60px)]">
           {menuItems.map((item, index) => (
-            <div key={index} className="py-2 border-b border-gray-700">
+            <div key={index} className="py-2 text-xs border-b border-gray-700">
               {/* Parent Menu Item */}
               <div
                 className="flex justify-between items-center cursor-pointer"
@@ -137,11 +150,11 @@ const Navbar = () => {
 
               {/* Mobile Submenu */}
               {item.subMenu && mobileSubmenuOpen === index && (
-                <div className="ml-4 mt-2">
+                <div className="ml-0 mt-2">
                   {item.subMenu.map((subItem, subIndex) => (
                     <div
                       key={subIndex}
-                      className="text-white bg-gray-700 text-sm py-1 cursor-pointer hover:bg-gray-600"
+                      className="text-white text-xs bg-gray-700 p-1 cursor-pointer hover:bg-gray-600"
                     >
                       {subItem}
                     </div>
