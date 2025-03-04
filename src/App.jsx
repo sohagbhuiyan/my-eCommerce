@@ -9,7 +9,7 @@ function App() {
     <>
      <Navbar/>
      <Home/>
-     <h1 className=''>ssjks</h1>
+     <h1 className=''></h1>
     </>
   )
 }

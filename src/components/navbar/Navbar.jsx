@@ -34,7 +34,11 @@ const Navbar = () => {
   const [hoverIndex, setHoverIndex] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [desktopSubmenuOpen, setDesktopSubmenuOpen] = useState(null);
+  const [activeDropdown, setActiveDropdown] = useState(null);
 
+  const toggleDropdown = (menu) => {
+    setActiveDropdown(activeDropdown === menu ? null : menu);
+  };
   return (
     <div className="bg-[#CF212B] text-white">
       {/* Top Bar */}
@@ -100,7 +104,7 @@ const Navbar = () => {
               <div
                 className={`${
                   (hoverIndex === index || desktopSubmenuOpen === index) ? 'block' : 'hidden'
-                } absolute left-0 mt-2 w-48 bg-gray-300 text-black shadow-lg rounded-md`}
+                } absolute left-0 mt-2 w-48 bg-gray-300 text-black shadow-lg rounded-md z-50 `}
               >
                 {item.subMenu.map((subItem, subIndex) => (
                   <div
@@ -165,14 +169,44 @@ const Navbar = () => {
           ))}
         </div>
       </div>
-
-      {/* Bottom Navigation (Only on Mobile) */}
+{/* Bottom Navigation (Mobile) */}
       <div className="md:hidden fixed bottom-0 left-0 w-full bg-[#CF212B] p-3 flex justify-around items-center text-white">
-        <FaShoppingCart className="text-xl cursor-pointer hover:text-gray-300" />
-        <FaHeart className="text-xl cursor-pointer hover:text-gray-300" />
-        <FaExchangeAlt className="text-xl cursor-pointer hover:text-gray-300" />
-        <FaUser className="text-xl cursor-pointer hover:text-gray-300" />
-      </div>
+        {[
+          { icon: <FaShoppingCart />, name: "cart", text: "Cart Items" },
+          { icon: <FaHeart />, name: "wishlist", text: "Wishlist" },
+          { icon: <FaExchangeAlt />, name: "exchange", text: "Exchange Items" },
+        ].map((item, index) => (
+          <div key={index} className="relative">
+            <div
+              className="text-xl cursor-pointer hover:text-gray-300"
+              onClick={() => toggleDropdown(item.name)}
+            >
+              {item.icon}
+            </div>
+            {activeDropdown === item.name && (
+              <div className="absolute bottom-12 left-0 bg-white text-black p-3 rounded-lg shadow-lg w-40">
+                <p>{item.text}</p>
+              </div>
+            )}
+          </div>
+        ))}
+
+        {/* User Profile Dropdown (Mobile) */}
+        <div className="relative">
+          <FaUser
+            className="text-xl cursor-pointer hover:text-gray-300"
+            onClick={() => toggleDropdown("user")}
+          />
+          {activeDropdown === "user" && (
+            <div className="absolute bottom-12 left-0 bg-white text-black p-3 rounded-lg shadow-lg w-48">
+              <p className="font-semibold">John Doe</p>
+              <p className="text-sm text-gray-600">johndoe@example.com</p>
+              <button className="mt-2 bg-red-500 text-white p-2 rounded-lg w-full">
+                Log Out              </button>
+            </div>
+          )}
+        </div>
+        </div>
     </div>
   );
 };
