@@ -79,12 +79,66 @@ const Navbar = () => {
             </button>
           </div>
 
-          <div className="hidden md:flex items-center justify-center space-x-4">
-            <FaShoppingCart className="text-lg cursor-pointer hover:text-gray-300" />
-            <FaHeart className="text-lg cursor-pointer hover:text-gray-300" />
-            <FaExchangeAlt className="text-lg cursor-pointer hover:text-gray-300" />
-            <FaUser className="text-lg cursor-pointer hover:text-gray-300" />
+          <div className="hidden md:flex items-center justify-center space-x-4 relative">
+      {/* Shopping Cart */}
+      <div className="relative">
+        <FaShoppingCart
+          className="text-lg cursor-pointer hover:text-gray-300"
+          onClick={() => toggleDropdown("cart")}
+        />
+        {activeDropdown === "cart" && (
+          <div className="absolute top-8 z-51 right-0 bg-white text-black p-3 rounded-lg shadow-lg w-48">
+            <p className="font-semibold">Your Cart</p>
+            <p className="text-sm text-gray-600">No items added yet.</p>
           </div>
+        )}
+      </div>
+
+      {/* Wishlist */}
+      <div className="relative">
+        <FaHeart
+          className="text-lg cursor-pointer hover:text-gray-300"
+          onClick={() => toggleDropdown("wishlist")}
+        />
+        {activeDropdown === "wishlist" && (
+          <div className="absolute top-8 z-51 right-0 bg-white text-black p-3 rounded-lg shadow-lg w-48">
+            <p className="font-semibold">Wishlist</p>
+            <p className="text-sm text-gray-600">Your favorite items.</p>
+          </div>
+        )}
+      </div>
+
+      {/* Compare */}
+      <div className="relative">
+        <FaExchangeAlt
+          className="text-lg cursor-pointer hover:text-gray-300"
+          onClick={() => toggleDropdown("compare")}
+        />
+        {activeDropdown === "compare" && (
+          <div className="absolute top-8 right-0 z-51 bg-white text-black p-3 rounded-lg shadow-lg w-48">
+            <p className="font-semibold">Compare Items</p>
+            <p className="text-sm text-gray-600">No items to compare.</p>
+          </div>
+        )}
+      </div>
+
+      {/* User Profile */}
+      <div className="relative">
+        <FaUser
+          className="text-lg cursor-pointer hover:text-gray-300"
+          onClick={() => toggleDropdown("user")}
+        />
+        {activeDropdown === "user" && (
+          <div className="absolute top-8 right-0 z-51 bg-white text-black p-3 rounded-lg shadow-lg w-48">
+            <p className="font-top">John Doe</p>
+            <p className="text-sm text-gray-600">johndoe@example.com</p>
+            <button className="mt-2 bg-red-500 text-white p-2 rounded-lg w-full">
+              Log Out
+            </button>
+          </div>
+        )}
+      </div>
+    </div>
         </div>
       </div>
 
@@ -198,11 +252,10 @@ const Navbar = () => {
             onClick={() => toggleDropdown("user")}
           />
           {activeDropdown === "user" && (
-            <div className="absolute bottom-12 left-0 bg-white text-black p-3 rounded-lg shadow-lg w-48">
+            <div className="absolute bottom-12 right-0 bg-white text-black p-3 rounded-lg shadow-lg w-48">
               <p className="font-semibold">John Doe</p>
               <p className="text-sm text-gray-600">johndoe@example.com</p>
-              <button className="mt-2 bg-red-500 text-white p-2 rounded-lg w-full">
-                Log Out              </button>
+              <button className="mt-2 bg-red-500 text-white p-2 rounded-lg w-full">Log Out</button>
             </div>
           )}
         </div>
