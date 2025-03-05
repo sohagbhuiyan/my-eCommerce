@@ -1,17 +1,34 @@
+import './App.css';
+import Gaming from './components/body/category/Gaming';
+import Laptop from './components/body/category/Laptop';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './components/pages/Home';
+import AllCategories from './components/body/AllCategories';
+import Printer from './components/body/category/Printer';
+import Software from './components/body/category/Software';
+import GPU from './components/body/category/GPU';
+import Monitor from './components/body/category/Monitor';
+import Camera from './components/body/category/Camera';
+import Speaker from './components/body/category/Speaker';
 
-import './App.css'
-import Home from './components/body/Home'
-import Navbar from './components/navbar/Navbar'
-import Test from './components/navbar/Test'
 
 function App() {
   return (
-    <>
-     <Navbar/>
-     <Home/>
-     <h1 className=''></h1>
-    </>
-  )
+    <Router>
+      <Routes>
+      <Route path="/" element={<Home />} />
+        <Route path="/laptop" element={<Laptop />} />
+        <Route path="/gaming" element={<Gaming />} />
+        <Route path="/printer" element={<Printer />} />
+        <Route path="/software" element={<Software />} />
+        <Route path="/gpu" element={<GPU />} />
+        <Route path="/monitor" element={<Monitor />} />
+        <Route path="/camera" element={<Camera />} />
+        <Route path="/speaker" element={<Speaker />} />
+        <Route path="/all-categories" element={<AllCategories />} />
+      </Routes>
+    </Router>
+  );
 }
 
-export default App
+export default App;

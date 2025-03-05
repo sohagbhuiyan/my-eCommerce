@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import {
   FaShoppingCart,
   FaHeart,
@@ -43,7 +44,7 @@ const Navbar = () => {
     <div className="bg-[#CF212B] text-white">
       {/* Top Bar */}
       
-      <div className="flex items-center justify-center space-x-6 px-6 py-2 text-sm">
+      <div className="flex items-center justify-center space-x-6 px-6 py-2 text-xs md:text-sm">
         <span className="hover:text-gray-300 cursor-pointer">Big Sale</span>
         <span className="hover:text-gray-300 cursor-pointer">Offers</span>
         <span className="hover:text-gray-300 cursor-pointer">System Builder</span>
@@ -60,8 +61,7 @@ const Navbar = () => {
 
         <div className="flex-1 flex items-center justify-center gap-3 px-2 md:gap-10">
 
-          <h1 className="text-sm sm:text-2xl font-bold md:text-4xl text-center">SaverFavor</h1>
-
+        <h1 className="text-sm sm:text-2xl font-bold md:text-4xl text-center cursor-pointer"onClick={() => window.location.href = "/"}>SaverFavor</h1>
           <div className="relative bg-white w-full max-w-xs sm:max-w-xs md:max-w-lg lg:max-w-xl rounded-md flex">
             <input
               type="text"
@@ -224,7 +224,7 @@ const Navbar = () => {
         </div>
       </div>
 {/* Bottom Navigation (Mobile) */}
-      <div className="md:hidden fixed bottom-0 left-0 w-full bg-[#CF212B] p-3 flex justify-around items-center text-white">
+      <div className="md:hidden fixed z-50 bottom-0 left-0 w-full bg-[#CF212B] p-3 flex justify-around items-center text-white">
         {[
           { icon: <FaShoppingCart />, name: "cart", text: "Cart Items" },
           { icon: <FaHeart />, name: "wishlist", text: "Wishlist" },
@@ -260,6 +260,7 @@ const Navbar = () => {
           )}
         </div>
         </div>
+    
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { slider, slider2 } from "../../Utils/images";
 
-const Home = () => {
+const Slider = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const images = [slider, slider2];
 
@@ -14,6 +14,8 @@ const Home = () => {
   }, [images.length]);
 
   return (
+    <>
+   
     <div className="relative w-full h-64 md:h-80 overflow-hidden">
       {/* Sliding images */}
       <div
@@ -34,13 +36,20 @@ const Home = () => {
           <div
             key={index}
             onClick={() => setCurrentIndex(index)}
-            className={`w-1 h-1 rounded-full cursor-pointer transition-all duration-300 ease-in-out 
+            className={`w-1 h-1 rounded-full cursor-pointer transition-all duration-300 ease-in 
               ${currentIndex === index ? 'bg-gray-500' : 'bg-white'}`}
           />
         ))}
       </div>
+      </div>
+      <div className="flex justify-center space-x-5 md:space-x-12 p-1 bg-orange-100 text-xs md:text-sm font-semibold text-yellow-950 ">
+      <p className="">0% EMI</p>
+      <p className="">24/7 Online Support</p>
+      <p className="">No charge on card paynent</p>
+  
     </div>
+    </>
   );
 };
 
-export default Home;
+export default Slider;
