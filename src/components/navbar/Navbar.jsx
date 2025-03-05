@@ -224,44 +224,45 @@ const Navbar = () => {
         </div>
       </div>
 {/* Bottom Navigation (Mobile) */}
-      <div className="md:hidden fixed z-50 bottom-0 left-0 w-full bg-[#CF212B] p-3 flex justify-around items-center text-white">
-        {[
-          { icon: <FaShoppingCart />, name: "cart", text: "Cart Items" },
-          { icon: <FaHeart />, name: "wishlist", text: "Wishlist" },
-          { icon: <FaExchangeAlt />, name: "exchange", text: "Exchange Items" },
-        ].map((item, index) => (
-          <div key={index} className="relative">
-            <div
-              className="text-xl cursor-pointer hover:text-gray-300"
-              onClick={() => toggleDropdown(item.name)}
-            >
-              {item.icon}
-            </div>
-            {activeDropdown === item.name && (
-              <div className="absolute bottom-12 left-0 bg-white text-black p-3 rounded-lg shadow-lg w-40">
-                <p>{item.text}</p>
-              </div>
-            )}
-          </div>
-        ))}
-
-        {/* User Profile Dropdown (Mobile) */}
-        <div className="relative">
-          <FaUser
-            className="text-xl cursor-pointer hover:text-gray-300"
-            onClick={() => toggleDropdown("user")}
-          />
-          {activeDropdown === "user" && (
-            <div className="absolute bottom-12 right-0 bg-white text-black p-3 rounded-lg shadow-lg w-48">
-              <p className="font-semibold">John Doe</p>
-              <p className="text-sm text-gray-600">johndoe@example.com</p>
-              <button className="mt-2 bg-red-500 text-white p-2 rounded-lg w-full">Log Out</button>
-            </div>
-          )}
+<div className="md:hidden fixed z-50 bottom-0 left-0 w-full bg-[#CF212B] p-2 flex justify-around items-center text-white">
+  {[
+    { icon: <FaShoppingCart />, name: "cart", text: "Cart Items" },
+    { icon: <FaHeart />, name: "wishlist", text: "Wishlist" },
+    { icon: <FaExchangeAlt />, name: "exchange", text: "Exchange Items" },
+  ].map((item, index) => (
+    <div key={index} className="relative flex flex-col items-center">
+      <div
+        className="text-xl cursor-pointer hover:text-gray-300"
+        onClick={() => toggleDropdown(item.name)}
+      >
+        {item.icon}
+      </div>
+      <span className="text-xs ">{item.name.charAt(0).toUpperCase() + item.name.slice(1)}</span>
+      {activeDropdown === item.name && (
+        <div className="absolute bottom-12 left-0 bg-white text-black p-3 rounded-lg shadow-lg w-40">
+          <p>{item.text}</p>
         </div>
-        </div>
-    
+      )}
     </div>
+  ))}
+
+  {/* User Profile Dropdown (Mobile) */}
+  <div className="relative flex flex-col items-center">
+    <FaUser
+      className="text-xl cursor-pointer hover:text-gray-300"
+      onClick={() => toggleDropdown("user")}
+    />
+    <span className="text-xs">Profile</span>
+    {activeDropdown === "user" && (
+      <div className="absolute bottom-12 right-0 bg-white text-black p-3 rounded-lg shadow-lg w-48">
+        <p className="font-semibold">John Doe</p>
+        <p className="text-sm text-gray-600">johndoe@example.com</p>
+        <button className="mt-2 bg-red-500 text-white p-2 rounded-lg w-full">Log Out</button>
+      </div>
+    )}
+  </div>
+</div>
+</div>
   );
 };
 

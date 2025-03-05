@@ -1,9 +1,11 @@
+import Navbar from "../../navbar/Navbar";
 import Categories from "../Categories";
 const Speaker = ()=> {
 
     return (
         <>
-        <h1>This is Gaming section</h1>
+        <Navbar/>
+        <h1>This is Speaker section</h1>
         </>
       );
     }

@@ -2,14 +2,14 @@ import { Link } from "react-router-dom";
 import { FaLaptop, FaGamepad, FaPrint, FaCogs, FaMicrochip, FaTv, FaCamera, FaSpeakerDeck } from "react-icons/fa";
 
 const categories = [
-  { name: "Laptop", icon: <FaLaptop />, path: "/laptop" },
-  { name: "Gaming", icon: <FaGamepad />, path: "/gaming" },
-  { name: "Printer", icon: <FaPrint />, path: "/printer" },
-  { name: "Software", icon: <FaCogs />, path: "/software" },
-  { name: "GPU", icon: <FaMicrochip />, path: "/gpu" },
-  { name: "Monitor", icon: <FaTv />, path: "/monitor" },
-  { name: "Camera", icon: <FaCamera />, path: "/camera" },
-  { name: "Speaker", icon: <FaSpeakerDeck />, path: "/speaker" },
+  { name: "Laptop", icon: <FaLaptop size={30} />, path: "/laptop" },
+  { name: "Gaming", icon: <FaGamepad size={30} />, path: "/gaming" },
+  { name: "Printer", icon: <FaPrint size={30} />, path: "/printer" },
+  { name: "Software", icon: <FaCogs size={30} />, path: "/software" },
+  { name: "GPU", icon: <FaMicrochip size={30}/>, path: "/gpu" },
+  { name: "Monitor", icon: <FaTv size={30}/>, path: "/monitor" },
+  { name: "Camera", icon: <FaCamera size={30}/>, path: "/camera" },
+  { name: "Speaker", icon: <FaSpeakerDeck size={30}/>, path: "/speaker" },
 ];
 
 const Categories = () => {

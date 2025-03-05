@@ -9,7 +9,7 @@ const CollectionCard = ({ image, category, name, price, discount, description })
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="relative p-2 overflow-hidden rounded-md">
+      <div className="relative p-1 md:p-2 overflow-hidden rounded-md">
         <img 
           src={image} 
           alt={name} 
@@ -20,11 +20,11 @@ const CollectionCard = ({ image, category, name, price, discount, description })
       </div>
       
       <div className="mt-2 text-center ">
-        <h2 className="text-sm font-bold text-gray-800">{category}</h2>
-        <p className="text-xs text-gray-600">{description}</p>
-        <p className="text-lg font-bold text-black mt-1">Tk {price}</p>
+        <h2 className="text-sm md:text-md font-bold text-gray-700">{category}</h2>
+        <p className="text-xs md:text-sm text-gray-600">{description}</p>
+        <p className="tex-sm md:text-lg font-bold text-gray-700 mt-1">Tk {price}</p>
         {discount && (
-          <p className="text-purple-600 text-sm font-semibold">
+          <p className="text-purple-600 text-xs md:text-sm font-medium">
             Save Tk {discount} on online order
           </p>
         )}

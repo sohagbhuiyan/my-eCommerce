@@ -87,7 +87,7 @@ const products = [
 
 const Collections = () => {
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-5 md:gap-6 lg:gap-8 p-4 md:px-12 ">
+    <div className="grid pb-5 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-5 md:gap-6 lg:gap-8 p-4 md:px-12 ">
       {products.map((product, index) => (
         <CollectionCard key={index} {...product} />
       ))}
