@@ -2,7 +2,7 @@ import { FaFacebook, FaTwitter, FaYoutube, FaInstagram, FaLinkedin } from "react
 
 const Footer = () => {
   return (
-    <footer className="bg-black text-white py-6 px-4 md:px-16 pb-15 sm:pb-2">
+    <footer className="bg-black text-white py-6 px-4 md:px-16 pb-15 sm:pb-5">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row justify-between gap-6">
 
