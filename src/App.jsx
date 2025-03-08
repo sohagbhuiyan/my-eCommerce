@@ -10,7 +10,7 @@ import GPU from './components/body/category/GPU';
 import Monitor from './components/body/category/Monitor';
 import Camera from './components/body/category/Camera';
 import Speaker from './components/body/category/Speaker';
-
+import ProductviewPage from './components/product/ProductviewPage';
 
 function App() {
   return (
@@ -26,6 +26,7 @@ function App() {
         <Route path="/camera" element={<Camera />} />
         <Route path="/speaker" element={<Speaker />} />
         <Route path="/all-categories" element={<AllCategories />} />
+        <Route path="//product/:name" element={<ProductviewPage />} />
       </Routes>
     </Router>
   );

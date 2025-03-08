@@ -228,7 +228,7 @@ const Navbar = () => {
   {[
     { icon: <FaShoppingCart />, name: "cart", text: "Cart Items" },
     { icon: <FaHeart />, name: "wishlist", text: "Wishlist" },
-    { icon: <FaExchangeAlt />, name: "exchange", text: "Exchange Items" },
+    { icon: <FaExchangeAlt />, name: "compare", text: "Compare Items" },
   ].map((item, index) => (
     <div key={index} className="relative flex flex-col items-center">
       <div
