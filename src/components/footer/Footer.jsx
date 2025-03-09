@@ -16,7 +16,7 @@ const Footer = () => {
               <FaLinkedin className="text-xl cursor-pointer hover:text-gray-400" />
             </div>
           </div>
-
+          
           <div className="grid grid-cols-2 gap-4 text-sm text-center md:text-left">
             <div className="flex flex-col gap-1">
               <p>About Us</p>

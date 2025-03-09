@@ -26,7 +26,7 @@ function App() {
         <Route path="/camera" element={<Camera />} />
         <Route path="/speaker" element={<Speaker />} />
         <Route path="/all-categories" element={<AllCategories />} />
-        <Route path="//product/:name" element={<ProductviewPage />} />
+        <Route path="/product/:name" element={<ProductviewPage />} />
       </Routes>
     </Router>
   );

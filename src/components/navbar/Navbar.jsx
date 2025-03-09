@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   FaShoppingCart,
@@ -36,6 +36,22 @@ const Navbar = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [desktopSubmenuOpen, setDesktopSubmenuOpen] = useState(null);
   const [activeDropdown, setActiveDropdown] = useState(null);
+
+  const [cartCount, setCartCount] = useState(0);
+
+// Function to update cart count
+const updateCartCount = () => {
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const count = cart.reduce((acc, item) => acc + item.quantity, 0);
+  setCartCount(count);
+};
+
+// UseEffect to listen for cart updates
+useEffect(() => {
+  updateCartCount(); // Initial load
+  window.addEventListener("cartUpdated", updateCartCount);
+  return () => window.removeEventListener("cartUpdated", updateCartCount);
+}, []);
 
   const toggleDropdown = (menu) => {
     setActiveDropdown(activeDropdown === menu ? null : menu);
@@ -82,10 +98,12 @@ const Navbar = () => {
           <div className="hidden md:flex items-center justify-center space-x-4 relative">
       {/* Shopping Cart */}
       <div className="relative">
-        <FaShoppingCart
-          className="text-lg cursor-pointer hover:text-gray-300"
-          onClick={() => toggleDropdown("cart")}
-        />
+  <FaShoppingCart className="text-lg cursor-pointer hover:text-gray-300" onClick={() => toggleDropdown("cart")} />
+  {cartCount > 0 && (
+    <span className="absolute -top-4 -right-3 bg-red-500 text-white text-xs p-1 rounded-full">
+      {cartCount}
+    </span>
+  )}
         {activeDropdown === "cart" && (
           <div className="absolute top-8 z-51 right-0 bg-white text-black p-3 rounded-lg shadow-lg w-48">
             <p className="font-semibold">Your Cart</p>

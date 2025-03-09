@@ -22,7 +22,7 @@ const products = [
     image: gpu,
     category: "GPU",
     name: "GPU QSW Ew00D ",
-    description: "24.1MP, Dual Pixel CMOS AF, 4K video...",
+    description: "Dual Pixel, 24.1MP, CMOS AF, 4K video...",
     price: 55200,
     discount: 700
   },
@@ -38,7 +38,7 @@ const products = [
     image: gaming,
     category: "Gaming",
     name: "Gaming POE 4s 200D ",
-    description: "24.1MP, Dual Pixel CMOS AF, 4K video...",
+    description: "4K video, 24.1MP, Dual Pixel CMOS AF...",
     price: 55200,
     discount: 1200
   },
@@ -62,7 +62,7 @@ const products = [
     image: gaming,
     category: "Gaming",
     name: "Gaming POE 4s 200D ",
-    description: "24.1MP, Dual Pixel CMOS AF, 4K video...",
+    description: "CMOS AF, 24.1MP, Dual Pixel, 4K video...",
     price: 55200,
     discount: 700
   },

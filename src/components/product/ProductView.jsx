@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { laptop, monitor } from "../../Utils/images";
-import Add from "./Add";
+import toast, { Toaster } from "react-hot-toast";
 
 const productData = {
   "HP M22F 21.5 Inch FHD IPS Monitor": {
-    image: monitor,
+    images: [monitor, laptop, monitor],
     category: "Monitor",
     name: "HP M22F 21.5 Inch FHD IPS Monitor",
     description: "HP M22F 21.5 Inch FHD IPS Monitor #2E2Y3AA/2D...",
@@ -23,9 +23,9 @@ const productData = {
     },
   },
   "Dell Inspiron 15 3511": {
-    image: laptop,
+    images: [laptop,monitor,laptop],
     category: "Laptop",
-    name: "Dell Inspiron 15 3511",
+    name: "Dell Inspiron 15 core i5 with Sata SSD",
     description: "Intel Core i5 11th Gen, 8GB RAM, 512GB SSD...",
     specialprice: 75000,
     regularprice: 80000,
@@ -47,7 +47,8 @@ const ProductView = () => {
   const product = productData[name];
 
   const [quantity, setQuantity] = useState(1);
-  const [showTest, setShowTest] = useState(false);
+  const [mainImage, setMainImage] = useState(product?.images[0] || "");
+  const [zoomStyle, setZoomStyle] = useState({ display: "none" });
 
   if (!product) {
     return <h2 className="text-center text-xl mt-6">Product Not Found</h2>;
@@ -56,16 +57,72 @@ const ProductView = () => {
   const increaseQuantity = () => setQuantity(quantity + 1);
   const decreaseQuantity = () => setQuantity(quantity > 1 ? quantity - 1 : 1);
 
-  const handleAddToCart = () => {
-    setShowTest(true); // Show Test component when Add to Cart is clicked
+  const handleMouseMove = (e) => {
+    const { left, top, width, height } = e.target.getBoundingClientRect();
+    const x = ((e.pageX - left) / width) * 100;
+    const y = ((e.pageY - top) / height) * 100;
+
+    setZoomStyle({
+      backgroundImage: `url(${mainImage})`,
+      backgroundSize: "200%",
+      backgroundPosition: `${x}% ${y}%`,
+      display: "block",
+          });
   };
 
+  const handleMouseLeave = () => {
+    setZoomStyle({ display: "none" });
+  };
+  const handleAddToCart = () => {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  
+    // Check if the item is already in the cart
+    const existingItemIndex = cart.findIndex((item) => item.productId === product.productId);
+    if (existingItemIndex !== -1) {
+      cart[existingItemIndex].quantity += quantity; // Update quantity
+    } else {
+      cart.push({ ...product, quantity });
+    }
+  
+    localStorage.setItem("cart", JSON.stringify(cart)); // Save updated cart
+  
+    toast.success(`${product.name} added to cart!`, { duration: 2000, position: "top-right" });
+  
+    // Dispatch a custom event to notify Navbar about cart update
+    window.dispatchEvent(new Event("cartUpdated"));
+  };
+  
   return (
-    <div className="p-4 max-w-4xl mx-auto flex flex-col md:flex-row gap-6">
-      <div className="flex flex-col items-center">
-        <img src={product.image} alt={product.name} className="w-80" />
+    <div className="p-4 mx-auto flex flex-col md:flex-row gap-10">
+      {/* Left Section: Thumbnails + Main Image */}
+      <div className="flex md:flex-row flex-col  gap-8 items-center p-2">
+        {/* Thumbnails */}
+        <div className="flex-col space-y-3 px-8 mb-2">
+          {product.images.map((img, index) => (
+            <img
+              key={index}
+              src={img}
+              alt="thumbnail"
+              className="w-16 h-16 border border-gray-500 cursor-pointer"
+              onMouseEnter={() => setMainImage(img)}
+            />
+          ))}
+        </div>
+        {/* Main Image with Zoom Effect */}
+        <div
+          className="relative w-96 h-96 border border-gray-400 overflow-hidden"
+          onMouseMove={handleMouseMove}
+          onMouseLeave={handleMouseLeave}
+        >
+          <img src={mainImage} alt={product.name} className="w-full h-full" />
+          <div
+            className="absolute top-0 left-0 w-full h-full cursor-zoom-in"
+            style={zoomStyle}
+          ></div>
+        </div>
       </div>
 
+      {/* Right Section: Product Details */}
       <div className="flex-1">
         <h2 className="text-2xl font-bold">{product.name}</h2>
         <p className="text-sm text-gray-600">Product Id: {product.productId}</p>
@@ -91,20 +148,18 @@ const ProductView = () => {
           <li><strong>Rotatable:</strong> {product.details.rotatable}</li>
           <li><strong>HDMI Port:</strong> {product.details.hdmiPort}</li>
         </ul>
-
+        
         {/* Quantity Selector & Add to Cart */}
         <div className="mt-4 flex items-center gap-2">
           <button className="bg-gray-300 px-3 py-1 rounded" onClick={decreaseQuantity}>-</button>
           <span>{quantity}</span>
           <button className="bg-gray-300 px-3 py-1 rounded" onClick={increaseQuantity}>+</button>
-          <button className="bg-red-600 text-white px-4 py-2 rounded cursor-pointer" onClick={handleAddToCart}>
+          <button className="bg-red-600 text-white px-4 py-2 rounded cursor-pointer"  onClick={handleAddToCart}>
             Add to Cart
           </button>
         </div>
       </div>
-
-      {/* Render Test component conditionally when Add to Cart is clicked */}
-      {showTest && <Add product={product} quantity={quantity} />}
+      <Toaster/>
     </div>
   );
 };
