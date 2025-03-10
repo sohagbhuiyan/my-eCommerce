@@ -17,7 +17,7 @@ const Footer = () => {
             </div>
           </div>
           
-          <div className="grid grid-cols-2 gap-4 text-sm text-center md:text-left">
+          <div className="grid md:grid-cols-2 gap-4 text-xs md:text-sm text-center md:text-left">
             <div className="flex flex-col gap-1">
               <p>About Us</p>
               <p>Branches & Pickup Points</p>
@@ -37,7 +37,7 @@ const Footer = () => {
             </div>
           </div>
 
-          <div className="text-sm text-center md:text-left">
+          <div className="text-xs md:text-sm text-center md:text-left">
             <h3 className="font-semibold">Contact Us</h3>
             <p>Head Office</p>
             <p>Saverfavor Limited</p>

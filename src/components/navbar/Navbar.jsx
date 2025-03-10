@@ -60,17 +60,17 @@ useEffect(() => {
     <div className="bg-[#CF212B] text-white">
       {/* Top Bar */}
       
-      <div className="flex items-center justify-center space-x-6 px-6 py-2 text-xs md:text-sm">
+      <div className="flex items-center justify-center space-x-2  md:space-x-6 md:px-6 py-2 text-xs md:text-sm">
         <span className="hover:text-gray-300 cursor-pointer">Big Sale</span>
         <span className="hover:text-gray-300 cursor-pointer">Offers</span>
         <span className="hover:text-gray-300 cursor-pointer">System Builder</span>
         <span className="hover:text-gray-300 cursor-pointer">Customer Service</span>
       </div>
-      <div className="flex items-center justify-between px-4 py-3 md:px-6 lg:px-12">
+      <div className="flex items-center justify-between px-3 py-3 md:px-6 lg:px-12">
         {/* Mobile Menu Button */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="md:hidden text-xl"
+          className="md:hidden text-lg" 
         >
           {mobileMenuOpen ? <FaTimes /> : <FaBars />}
         </button>
@@ -78,7 +78,7 @@ useEffect(() => {
         <div className="flex-1 flex items-center justify-center gap-3 px-2 md:gap-10">
 
         <h1 className="text-sm sm:text-2xl font-bold md:text-4xl text-center cursor-pointer"onClick={() => window.location.href = "/"}>SaverFavor</h1>
-          <div className="relative bg-white w-full max-w-xs sm:max-w-xs md:max-w-lg lg:max-w-xl rounded-md flex">
+          <div className="relative bg-white md:w-full max-w-xs sm:max-w-xs md:max-w-lg lg:max-w-xl rounded-md flex">
             <input
               type="text"
               placeholder="Enter Your Keyword..."
@@ -105,7 +105,7 @@ useEffect(() => {
     </span>
   )}
         {activeDropdown === "cart" && (
-          <div className="absolute top-8 z-51 right-0 bg-white text-black p-3 rounded-lg shadow-lg w-48">
+          <div className="absolute top-8 z-51 right-0 bg-white text-black p-3 rounded-lg shadow-lg w-24 md:w-48">
             <p className="font-semibold">Your Cart</p>
             <p className="text-sm text-gray-600">No items added yet.</p>
           </div>

@@ -93,24 +93,24 @@ const ProductView = () => {
   };
   
   return (
-    <div className="p-4 mx-auto flex flex-col md:flex-row gap-10">
+    <div className="p-4 flex flex-col-reverse  md:flex-row gap-10">
       {/* Left Section: Thumbnails + Main Image */}
-      <div className="flex md:flex-row flex-col  gap-8 items-center p-2">
+      <div className="flex sm:flex-row md:flex-row gap-4 sm:gap-8 items-center">
         {/* Thumbnails */}
-        <div className="flex-col space-y-3 px-8 mb-2">
+        <div className="flex-col  px-6 space-x-2 space-y-3 md:px-8 mb-2">
           {product.images.map((img, index) => (
             <img
               key={index}
               src={img}
               alt="thumbnail"
-              className="w-16 h-16 border border-gray-500 cursor-pointer"
+              className="w-12 h-12 sm:w-16 sm:h-16 border border-gray-500 cursor-pointer"
               onMouseEnter={() => setMainImage(img)}
             />
           ))}
         </div>
         {/* Main Image with Zoom Effect */}
         <div
-          className="relative w-96 h-96 border border-gray-400 overflow-hidden"
+          className="relative w-36 h-36 sm:w-96 sm:h-96 border border-gray-400 overflow-hidden"
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}
         >
@@ -123,24 +123,23 @@ const ProductView = () => {
       </div>
 
       {/* Right Section: Product Details */}
-      <div className="flex-1">
-        <h2 className="text-2xl font-bold">{product.name}</h2>
-        <p className="text-sm text-gray-600">Product Id: {product.productId}</p>
+      <div className="flex-col px-6 md:px-10 md:flex-1">
+        <h2 className="text-md md:text-2xl font-bold">{product.name}</h2>
+        <p className="text-xs md:text-sm text-gray-600">Product Id: {product.productId}</p>
 
-        <p className="text-lg font-bold text-red-700 mt-2">
+        <p className="md:text-lg text-sm font-bold text-red-700 mt-2">
           Special Price: Tk {product.specialprice}
         </p>
-        <p className="text-md font-bold text-gray-700 mt-2">
+        <p className="text-sm md:text-md font-bold text-gray-700 mt-2">
           Regular Price: Tk {product.regularprice}
         </p>
         {product.discount && (
-          <p className="text-purple-600 text-sm">Save Tk {product.discount} on online order</p>
+          <p className="text-purple-600 text-xs md:text-sm">Save Tk {product.discount} on online order</p>
         )}
 
-        <button className="bg-red-600 text-white py-2 px-4 rounded mt-4">Check Availability</button>
 
-        <h3 className="mt-4 font-semibold text-lg">Quick Overview</h3>
-        <ul className="list-disc pl-6 text-sm text-gray-700">
+        <h3 className="mt-4 font-semibold text-md md:text-lg ">Quick Overview</h3>
+        <ul className="list-disc pl-6 text-xs md:text-sm text-gray-700">
           <li><strong>Display Size:</strong> {product.details.displaySize}</li>
           <li><strong>Display Resolution:</strong> {product.details.resolution}</li>
           <li><strong>Panel Type:</strong> {product.details.panelType}</li>
@@ -151,15 +150,15 @@ const ProductView = () => {
         
         {/* Quantity Selector & Add to Cart */}
         <div className="mt-4 flex items-center gap-2">
-          <button className="bg-gray-300 px-3 py-1 rounded" onClick={decreaseQuantity}>-</button>
+          <button className="bg-gray-300 text-xs md:text-sm px-3 py-1 rounded" onClick={decreaseQuantity}>-</button>
           <span>{quantity}</span>
-          <button className="bg-gray-300 px-3 py-1 rounded" onClick={increaseQuantity}>+</button>
-          <button className="bg-red-600 text-white px-4 py-2 rounded cursor-pointer"  onClick={handleAddToCart}>
+          <button className="bg-gray-300 text-xs md:text-sm px-3 py-1 rounded" onClick={increaseQuantity}>+</button>
+          <button className="bg-red-600 text-xs md:text-md font-medium text-white p-2 rounded cursor-pointer"  onClick={handleAddToCart}>
             Add to Cart
           </button>
         </div>
       </div>
-      <Toaster/>
+      <Toaster className=""/>
     </div>
   );
 };
